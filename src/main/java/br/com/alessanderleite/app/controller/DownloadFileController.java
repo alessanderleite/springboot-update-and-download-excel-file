@@ -2,7 +2,6 @@ package br.com.alessanderleite.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.InputStreamSource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,7 @@ public class DownloadFileController {
 	 * Download Files 
 	 */
 	@GetMapping("/file")
-	public ResponseEntity<InputStreamSource> downloadFile() {
+	public ResponseEntity<InputStreamResource> downloadFile() {
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Dispositon", "attachment; filename=customers.xlsx");
