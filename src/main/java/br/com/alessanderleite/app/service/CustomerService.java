@@ -1,6 +1,7 @@
 package br.com.alessanderleite.app.service;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,19 +24,19 @@ public class CustomerService {
 			List<Customer> listCustomers = Utils.parseExcelFile(file.getInputStream());
 			// Save Customers to Database
 			customerRepository.saveAll(listCustomers);
-		} catch (Exception e) {
+		} catch (IOException e) {
 			throw new RuntimeException("FAIL! -> message = " + e.getMessage());
 		}
 	}
 	
 	// Load Data to Excel File
 	public ByteArrayInputStream loadFile() {
-		List<Customer> customers = (List<Customer>) customerRepository.findAll();
+		List<Customer> customers = customerRepository.findAll();
 		
 		try {
 			ByteArrayInputStream input = Utils.customerToExcel(customers);
 			return input;
-		} catch (Exception e) {}
+		} catch (IOException e) {}
 		
 		return null;
 	}
